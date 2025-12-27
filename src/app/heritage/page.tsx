@@ -1,4 +1,5 @@
 import { Metadata } from 'next';
+import Link from 'next/link';
 import { CulturalHeritageGallery, CulturalImage } from '@/components/ui/CulturalHeritageGallery';
 import HeroSection from '@/components/ui/HeroSection';
 import { Card } from '@/components/ui/Card';
@@ -85,11 +86,18 @@ const heritageStories = [
     link: '/heritage/architecture'
   },
   {
-    id: 'vegetarian-lifestyle',
-    title: 'Pure Vegetarian Tradition',
-    description: 'Learn about the village\'s commitment to vegetarian lifestyle and its spiritual significance in daily life.',
-    image: '/images/heritage/vegetarian-tradition.jpg',
+    id: 'living-traditions',
+    title: 'Living Community Traditions',
+    description: 'Experience the vibrant traditions that have shaped daily life in Devmali for over 1000 years, from spiritual practices to community celebrations.',
+    image: '/images/heritage/community-traditions.jpg',
     link: '/heritage/traditions'
+  },
+  {
+    id: 'heritage-stories',
+    title: 'Sacred Stories & Legends',
+    description: 'Journey through the captivating stories and legends that have shaped Devmali village over eleven centuries of cultural heritage.',
+    image: '/images/heritage/village-legends.jpg',
+    link: '/heritage/stories'
   },
 ];
 
@@ -103,6 +111,26 @@ export default function HeritagePage() {
         spiritualQuote="Journey through the rich cultural tapestry of Devmali village, where ancient wisdom meets modern preservation efforts in the heart of Rajasthan."
       />
 
+      {/* Quick Navigation */}
+      <section className="py-8 px-4 bg-white border-b border-secondary-cream">
+        <div className="max-w-7xl mx-auto">
+          <div className="flex flex-wrap justify-center gap-4">
+            <Link href="/heritage/village-history" className="px-6 py-3 bg-primary-saffron/10 text-primary-saffron rounded-cultural hover:bg-primary-saffron hover:text-white transition-colors font-medium">
+              1100 Years History
+            </Link>
+            <Link href="/heritage/architecture" className="px-6 py-3 bg-primary-earth/10 text-primary-earth rounded-cultural hover:bg-primary-earth hover:text-white transition-colors font-medium">
+              Sacred Architecture
+            </Link>
+            <Link href="/heritage/traditions" className="px-6 py-3 bg-primary-golden/10 text-primary-golden rounded-cultural hover:bg-primary-golden hover:text-white transition-colors font-medium">
+              Living Traditions
+            </Link>
+            <Link href="/heritage/stories" className="px-6 py-3 bg-primary-maroon/10 text-primary-maroon rounded-cultural hover:bg-primary-maroon hover:text-white transition-colors font-medium">
+              Sacred Stories
+            </Link>
+          </div>
+        </div>
+      </section>
+
       {/* Heritage Stories Section */}
       <section className="py-16 px-4 max-w-7xl mx-auto">
         <div className="text-center mb-12">
@@ -115,40 +143,41 @@ export default function HeritagePage() {
           </p>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mb-16">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 mb-16">
           {heritageStories.map((story) => (
-            <Card
-              key={story.id}
-              variant="cultural"
-              className="group cursor-pointer hover:shadow-spiritual transition-all duration-300"
-            >
-              <div className="aspect-video relative overflow-hidden rounded-t-cultural">
-                <div className="w-full h-full bg-gradient-to-br from-primary-saffron/20 to-primary-golden/20 flex items-center justify-center">
-                  <div className="text-center">
-                    <div className="w-16 h-16 mx-auto mb-4 bg-primary-saffron/20 rounded-cultural flex items-center justify-center">
-                      <svg className="w-8 h-8 text-primary-saffron" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.746 0 3.332.477 4.5 1.253v13C19.832 18.477 18.246 18 16.5 18c-1.746 0-3.332.477-4.5 1.253" />
-                      </svg>
+            <Link key={story.id} href={story.link}>
+              <Card
+                variant="cultural"
+                className="group cursor-pointer hover:shadow-spiritual transition-all duration-300 h-full"
+              >
+                <div className="aspect-video relative overflow-hidden rounded-t-cultural">
+                  <div className="w-full h-full bg-gradient-to-br from-primary-saffron/20 to-primary-golden/20 flex items-center justify-center">
+                    <div className="text-center">
+                      <div className="w-16 h-16 mx-auto mb-4 bg-primary-saffron/20 rounded-cultural flex items-center justify-center">
+                        <svg className="w-8 h-8 text-primary-saffron" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.746 0 3.332.477 4.5 1.253v13C19.832 18.477 18.246 18 16.5 18c-1.746 0-3.332.477-4.5 1.253" />
+                        </svg>
+                      </div>
+                      <p className="text-sm text-secondary-charcoal/60">Heritage Story</p>
                     </div>
-                    <p className="text-sm text-secondary-charcoal/60">Heritage Story</p>
                   </div>
                 </div>
-              </div>
-              <div className="p-6">
-                <h3 className="text-xl font-semibold text-secondary-charcoal mb-3 group-hover:text-primary-saffron transition-colors">
-                  {story.title}
-                </h3>
-                <p className="text-secondary-charcoal/70 mb-4 leading-relaxed">
-                  {story.description}
-                </p>
-                <div className="flex items-center text-primary-saffron font-medium">
-                  <span>Read More</span>
-                  <svg className="w-4 h-4 ml-2 group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
-                  </svg>
+                <div className="p-6 flex-1 flex flex-col">
+                  <h3 className="text-xl font-semibold text-secondary-charcoal mb-3 group-hover:text-primary-saffron transition-colors">
+                    {story.title}
+                  </h3>
+                  <p className="text-secondary-charcoal/70 mb-4 leading-relaxed flex-1">
+                    {story.description}
+                  </p>
+                  <div className="flex items-center text-primary-saffron font-medium mt-auto">
+                    <span>Read More</span>
+                    <svg className="w-4 h-4 ml-2 group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+                    </svg>
+                  </div>
                 </div>
-              </div>
-            </Card>
+              </Card>
+            </Link>
           ))}
         </div>
       </section>
