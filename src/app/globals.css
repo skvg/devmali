@@ -1,6 +1,87 @@
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Noto+Sans+Devanagari:wght@300;400;500;600;700&family=Playfair+Display:wght@400;500;600;700&display=swap');
 @import "tailwindcss";
 
+/* Tailwind CSS v4 Custom Theme */
+@theme {
+  /* Custom Colors */
+  --color-primary-saffron: #FF6B35;
+  --color-primary-maroon: #8B0000;
+  --color-primary-golden: #FFD700;
+  --color-primary-earth: #8B4513;
+  
+  --color-primary-50: #FFF7F0;
+  --color-primary-100: #FFEDE0;
+  --color-primary-200: #FFD6B8;
+  --color-primary-300: #FFB885;
+  --color-primary-400: #FF9552;
+  --color-primary-500: #FF6B35;
+  --color-primary-600: #E55A2B;
+  --color-primary-700: #CC4A21;
+  --color-primary-800: #B33A17;
+  --color-primary-900: #992A0D;
+  
+  --color-secondary-sage: #87A96B;
+  --color-secondary-cream: #FFF8DC;
+  --color-secondary-charcoal: #36454F;
+  
+  --color-secondary-maroon-50: #F5F0F0;
+  --color-secondary-maroon-100: #EBE0E0;
+  --color-secondary-maroon-200: #D6C2C2;
+  --color-secondary-maroon-300: #C2A3A3;
+  --color-secondary-maroon-400: #AD8585;
+  --color-secondary-maroon-500: #996666;
+  --color-secondary-maroon-600: #8B0000;
+  --color-secondary-maroon-700: #7A0000;
+  --color-secondary-maroon-800: #6B0000;
+  --color-secondary-maroon-900: #5C0000;
+  
+  --color-secondary-golden-50: #FFFEF0;
+  --color-secondary-golden-100: #FFFDE0;
+  --color-secondary-golden-200: #FFFAC2;
+  --color-secondary-golden-300: #FFF7A3;
+  --color-secondary-golden-400: #FFF485;
+  --color-secondary-golden-500: #FFD700;
+  --color-secondary-golden-600: #E6C200;
+  --color-secondary-golden-700: #CCAD00;
+  --color-secondary-golden-800: #B39900;
+  --color-secondary-golden-900: #998400;
+  
+  --color-secondary-earth-50: #F7F4F0;
+  --color-secondary-earth-100: #EFE8E0;
+  --color-secondary-earth-200: #DFD1C2;
+  --color-secondary-earth-300: #CFBAA3;
+  --color-secondary-earth-400: #BFA385;
+  --color-secondary-earth-500: #AF8C66;
+  --color-secondary-earth-600: #8B4513;
+  --color-secondary-earth-700: #7A3D11;
+  --color-secondary-earth-800: #6B350F;
+  --color-secondary-earth-900: #5C2D0D;
+
+  /* Custom Border Radius */
+  --radius-cultural: 0.75rem;
+  --radius-spiritual: 1rem;
+
+  /* Custom Box Shadows */
+  --shadow-cultural: 0 4px 6px -1px rgba(255, 107, 53, 0.1), 0 2px 4px -1px rgba(255, 107, 53, 0.06);
+  --shadow-spiritual: 0 10px 15px -3px rgba(139, 0, 0, 0.1), 0 4px 6px -2px rgba(139, 0, 0, 0.05);
+  --shadow-golden: 0 20px 25px -5px rgba(255, 215, 0, 0.1), 0 10px 10px -5px rgba(255, 215, 0, 0.04);
+  --shadow-earth: 0 25px 50px -12px rgba(139, 69, 19, 0.25);
+  --shadow-soft: 0 2px 4px 0 rgba(0, 0, 0, 0.05);
+  --shadow-medium: 0 4px 8px 0 rgba(0, 0, 0, 0.1);
+  --shadow-large: 0 8px 16px 0 rgba(0, 0, 0, 0.15);
+
+  /* Custom Spacing */
+  --spacing-18: 4.5rem;
+  --spacing-88: 22rem;
+  --spacing-128: 32rem;
+  --spacing-144: 36rem;
+
+  /* Font Families */
+  --font-family-inter: 'Inter', sans-serif;
+  --font-family-devanagari: 'Noto Sans Devanagari', sans-serif;
+  --font-family-playfair: 'Playfair Display', serif;
+}
+
 :root {
   --background: 0 0% 100%;
   --foreground: 222.2 84% 4.9%;
@@ -63,7 +144,7 @@
 body {
   background-color: hsl(var(--background));
   color: hsl(var(--foreground));
-  font-family: 'Inter', sans-serif;
+  font-family: var(--font-family-inter);
 }
 
 /* Cultural motifs and patterns */

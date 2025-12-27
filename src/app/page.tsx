@@ -1,4 +1,5 @@
 import { Layout } from '@/components/layout';
+import { Button, Card, CardContent } from '@/components/ui';
 
 export default function Home() {
   return (
@@ -6,7 +7,7 @@ export default function Home() {
       <div className="min-h-screen bg-gradient-to-b from-secondary-cream to-white">
         {/* Hero Section */}
         <section className="relative h-screen flex items-center justify-center overflow-hidden">
-          <div className="absolute inset-0 rajasthani-pattern opacity-20"></div>
+          <div className="absolute inset-0 rajasthani-pattern opacity-80"></div>
           <div className="relative z-10 text-center max-w-4xl mx-auto px-4">
             <h1 className="text-4xl md:text-6xl font-playfair font-bold text-primary-maroon mb-6">
               Welcome to Devmali
@@ -15,12 +16,12 @@ export default function Home() {
               Discover the rich cultural heritage of India's Best Tourist Village
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              <button className="bg-primary-saffron hover:bg-opacity-90 text-white px-8 py-3 rounded-full font-medium transition-all duration-200 transform hover:scale-105">
+              <Button variant="primary" size="lg" className="rounded-full">
                 Explore Heritage
-              </button>
-              <button className="border-2 border-primary-maroon text-primary-maroon hover:bg-primary-maroon hover:text-white px-8 py-3 rounded-full font-medium transition-all duration-200">
+              </Button>
+              <Button variant="outline" size="lg" className="rounded-full">
                 Virtual Tour
-              </button>
+              </Button>
             </div>
           </div>
         </section>
@@ -39,35 +40,41 @@ export default function Home() {
             </div>
 
             <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-              <div className="text-center p-6 bg-white rounded-lg shadow-md hover:shadow-lg transition-shadow duration-200">
-                <div className="w-16 h-16 bg-primary-saffron rounded-full flex items-center justify-center mx-auto mb-4">
-                  <span className="text-white text-2xl">🏛️</span>
-                </div>
-                <h3 className="text-xl font-semibold text-primary-maroon mb-2">Cultural Heritage</h3>
-                <p className="text-secondary-charcoal">
-                  Explore ancient traditions, mud house architecture, and community values preserved for centuries.
-                </p>
-              </div>
+              <Card variant="cultural" className="text-center hover:shadow-spiritual transition-shadow duration-300">
+                <CardContent className="pt-6">
+                  <div className="w-16 h-16 bg-primary-saffron rounded-full flex items-center justify-center mx-auto mb-4">
+                    <span className="text-white text-2xl">🏛️</span>
+                  </div>
+                  <h3 className="text-xl font-semibold text-primary-maroon mb-2">Cultural Heritage</h3>
+                  <p className="text-secondary-charcoal">
+                    Explore ancient traditions, mud house architecture, and community values preserved for centuries.
+                  </p>
+                </CardContent>
+              </Card>
 
-              <div className="text-center p-6 bg-white rounded-lg shadow-md hover:shadow-lg transition-shadow duration-200">
-                <div className="w-16 h-16 bg-primary-golden rounded-full flex items-center justify-center mx-auto mb-4">
-                  <span className="text-white text-2xl">🙏</span>
-                </div>
-                <h3 className="text-xl font-semibold text-primary-maroon mb-2">Spiritual Journey</h3>
-                <p className="text-secondary-charcoal">
-                  Connect with Lord Devnarayan's teachings and experience the village's spiritual essence.
-                </p>
-              </div>
+              <Card variant="spiritual" className="text-center hover:shadow-golden transition-shadow duration-300">
+                <CardContent className="pt-6">
+                  <div className="w-16 h-16 bg-primary-golden rounded-full flex items-center justify-center mx-auto mb-4">
+                    <span className="text-white text-2xl">🙏</span>
+                  </div>
+                  <h3 className="text-xl font-semibold text-primary-maroon mb-2">Spiritual Journey</h3>
+                  <p className="text-secondary-charcoal">
+                    Connect with Lord Devnarayan's teachings and experience the village's spiritual essence.
+                  </p>
+                </CardContent>
+              </Card>
 
-              <div className="text-center p-6 bg-white rounded-lg shadow-md hover:shadow-lg transition-shadow duration-200">
-                <div className="w-16 h-16 bg-secondary-sage rounded-full flex items-center justify-center mx-auto mb-4">
-                  <span className="text-white text-2xl">🌄</span>
-                </div>
-                <h3 className="text-xl font-semibold text-primary-maroon mb-2">Natural Beauty</h3>
-                <p className="text-secondary-charcoal">
-                  Discover the stunning Aravalli landscape and the village's harmony with nature.
-                </p>
-              </div>
+              <Card variant="elevated" className="text-center hover:shadow-earth transition-shadow duration-300">
+                <CardContent className="pt-6">
+                  <div className="w-16 h-16 bg-secondary-sage rounded-full flex items-center justify-center mx-auto mb-4">
+                    <span className="text-white text-2xl">🌄</span>
+                  </div>
+                  <h3 className="text-xl font-semibold text-primary-maroon mb-2">Natural Beauty</h3>
+                  <p className="text-secondary-charcoal">
+                    Discover the stunning Aravalli landscape and the village's harmony with nature.
+                  </p>
+                </CardContent>
+              </Card>
             </div>
           </div>
         </section>
