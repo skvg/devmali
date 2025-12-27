@@ -15,3 +15,8 @@ export type { GalleryProps, GalleryImage } from './Gallery';
 
 export { LanguageSwitcher } from './LanguageSwitcher';
 export type { LanguageSwitcherProps, Language } from './LanguageSwitcher';
+
+export { default as HeroSection } from './HeroSection';
+export { default as TestimonialCarousel } from './TestimonialCarousel';
+export { default as FeaturedContentCards } from './FeaturedContentCards';
+export { default as OverviewSection } from './OverviewSection';
