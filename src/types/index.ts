@@ -82,8 +82,8 @@ export const SpiritualContentSchema = z.object({
   title: MultilingualStringSchema,
   content: MultilingualStringSchema,
   type: z.enum(['prayer', 'mantra', 'story', 'teaching']),
-  audioUrl: z.string().url().optional(),
-  downloadUrl: z.string().url().optional(),
+  audioUrl: z.string().optional(),
+  downloadUrl: z.string().optional(),
   significance: MultilingualStringSchema,
 });
 
