@@ -1,0 +1,101 @@
+name: Deploy Next.js to S3 (Production)
+
+on:
+  push:
+    branches:
+      - production
+  workflow_dispatch: # Allow manual triggering
+
+env:
+  NODE_VERSION: '20'
+  AWS_REGION: 'us-east-1' # Default region, can be overridden by secret
+
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-latest
+    
+    environment:
+      name: production
+      url: https://${{ secrets.CLOUDFRONT_DOMAIN || secrets.S3_BUCKET_NAME }}.s3-website-${{ secrets.AWS_REGION || env.AWS_REGION }}.amazonaws.com
+
+    steps:
+      # 1️⃣ Checkout code
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      # 2️⃣ Setup Node.js
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: ${{ env.NODE_VERSION }}
+          cache: 'npm'
+
+      # 3️⃣ Install dependencies
+      - name: Install dependencies
+        run: npm ci
+
+      # 4️⃣ Type check
+      - name: Type check
+        run: npm run type-check
+
+      # 5️⃣ Lint code
+      - name: Lint code
+        run: npm run lint
+
+      # 6️⃣ Build Next.js (Static Export)
+      - name: Build Next.js for static export
+        run: npm run build
+        env:
+          NODE_ENV: production
+
+      # 7️⃣ Configure AWS credentials
+      - name: Configure AWS credentials
+        uses: aws-actions/configure-aws-credentials@v4
+        with:
+          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          aws-region: ${{ secrets.AWS_REGION || env.AWS_REGION }}
+
+      # 8️⃣ Deploy to S3 with optimized cache headers
+      - name: Deploy to S3
+        run: |
+          # Sync HTML files with no-cache for dynamic content
+          aws s3 sync out s3://${{ secrets.S3_BUCKET_NAME }} \
+            --exclude "*" \
+            --include "*.html" \
+            --delete \
+            --cache-control "public,max-age=0,must-revalidate"
+          
+          # Sync CSS and JS files with long cache for static assets
+          aws s3 sync out s3://${{ secrets.S3_BUCKET_NAME }} \
+            --exclude "*.html" \
+            --include "*.css" \
+            --include "*.js" \
+            --include "*.json" \
+            --cache-control "public,max-age=31536000,immutable"
+          
+          # Sync images and other assets with medium cache
+          aws s3 sync out s3://${{ secrets.S3_BUCKET_NAME }} \
+            --exclude "*.html" \
+            --exclude "*.css" \
+            --exclude "*.js" \
+            --exclude "*.json" \
+            --cache-control "public,max-age=86400"
+
+      # 9️⃣ Invalidate CloudFront cache (if CloudFront is used)
+      - name: Invalidate CloudFront cache
+        if: ${{ secrets.CLOUDFRONT_DISTRIBUTION_ID }}
+        run: |
+          aws cloudfront create-invalidation \
+            --distribution-id ${{ secrets.CLOUDFRONT_DISTRIBUTION_ID }} \
+            --paths "/*"
+
+      # 🔟 Deployment summary
+      - name: Deployment summary
+        run: |
+          echo "✅ Deployment completed successfully!"
+          echo "🌐 Website URL: https://${{ secrets.CLOUDFRONT_DOMAIN || secrets.S3_BUCKET_NAME }}.s3-website-${{ secrets.AWS_REGION || env.AWS_REGION }}.amazonaws.com"
+          echo "📦 S3 Bucket: ${{ secrets.S3_BUCKET_NAME }}"
+          if [ -n "${{ secrets.CLOUDFRONT_DISTRIBUTION_ID }}" ]; then
+            echo "🚀 CloudFront Distribution: ${{ secrets.CLOUDFRONT_DISTRIBUTION_ID }}"
+          fi

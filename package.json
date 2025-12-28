@@ -11,9 +11,9 @@
     "format": "prettier --write .",
     "format:check": "prettier --check .",
     "type-check": "tsc --noEmit",
-    "test": "jest",
-    "test:watch": "jest --watch",
-    "test:coverage": "jest --coverage"
+    "deploy:build": "npm run type-check && npm run lint && npm run build",
+    "deploy:local": "node -e \"console.log('Use scripts/deploy.bat build (Windows) or scripts/deploy.sh build (Unix)')\"",
+    "serve": "npx serve out -p 3000"
   },
   "dependencies": {
     "clsx": "^2.1.1",
@@ -28,18 +28,13 @@
   },
   "devDependencies": {
     "@tailwindcss/postcss": "^4",
-    "@testing-library/jest-dom": "^6.9.1",
-    "@testing-library/react": "^16.3.1",
-    "@testing-library/user-event": "^14.6.1",
-    "@types/jest": "^30.0.0",
     "@types/node": "^20",
     "@types/react": "^19",
     "@types/react-dom": "^19",
     "eslint": "^9",
     "eslint-config-next": "16.1.1",
-    "jest": "^30.2.0",
-    "jest-environment-jsdom": "^30.2.0",
     "prettier": "^3.7.4",
+    "serve": "^14.2.5",
     "tailwindcss": "^4",
     "typescript": "^5"
   }
